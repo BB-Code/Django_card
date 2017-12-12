@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Python 文章</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/semantic.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/semantic.js"></script>
+</head>
+<style type="text/css">
+.grid {
+    margin-top: 4rem !important;
+}
+</style>
+
+<body>
+    <div class="ui middle aligned stackable grid container">
+        {% if error_msg %}
+        <div class="ui negative message">
+            <i class="close icon"></i>
+            <div class="header">非常抱歉没有找到相应的文章</div>
+            <p>{{ error_msg }}</p>
+        </div>
+        {% endif %}
+        <div class="ui cards">
+            {% for item in db_info %}
+            <div class="card">
+                <div class="content">
+                    <div class="description"><a href="{{item.url}}">{{item.title}}</a></div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="card">
+                <div class="content">
+                    <div class="description">没有搜索到符合条件的文章</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

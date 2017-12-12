@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Python 文章</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/semantic.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/semantic.js"></script>
+</head>
+
+<body>
+    <div class="ui raised very padded text container segment">
+        <div class="ui search">
+            <form method="get" action="/search/">
+                <div class="ui icon input">
+                    <input class="prompt" type="text" placeholder="文章搜索" name="q">
+                </div>
+                <button class="ui primary button" type="submit">搜索</button>
+            </form>
+        </div>
+        {% for item in info_list%}
+        <div class="ui items">
+            <div class="item">
+                <div class="middle aligned content">
+                    <a class="header" href="{{item.url}}">{{item.title}}</a>
+                    <div class="extra">
+                        <a class="ui teal image label">发布日期:{{item.date}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class=pagination>
+            {% if info_list.has_previous %}
+            <button class="ui right labeled icon button"><i class="left arrow icon"></i><a href="?page={{ info_list.previous_page_number }}">上一页</a></button>
+            {% endif %}
+            <a href="">当前第 {{info_list.number }} 页到 {{ info_list.paginator.num_pages }}</a> {% if info_list.has_next %}
+            <button class="ui right labeled icon button"><i class="right arrow icon"></i> <a href="?page={{ info_list.next_page_number}}">下一页</a></button>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>
